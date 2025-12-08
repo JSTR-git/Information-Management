@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SQL Practice Files</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 3px solid #667eea;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .file-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 5px solid #667eea;
+            text-align: center;
+        }
+        
+        .file-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .file-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .info-item i {
+            color: #667eea;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 25px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .loading {
+            display: none;
+            color: #667eea;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .download-success {
+            display: none;
+            color: #27ae60;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .file-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .download-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 SQL Practice Files</h1>
+            <p class="subtitle">Download SQL database file for your lesson | <strong>Safe for students!</strong></p>
+        </header>
+        
+        <!-- SINGLE LESSON SECTION -->
+        <div id="lesson1">
+            <h2><i class="fas fa-database"></i> Lesson 1: Basic SQL Commands</h2>
+            <p>Learn CREATE, INSERT, SELECT statements with simple student database. Perfect for beginners!</p>
+            
+            <div class="file-card">
+                <div class="file-icon" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;">
+                    <i class="fas fa-file-code"></i>
+                </div>
+                
+                <h3>📁 employees_tbl.sql</h3>
+                <p>Contains a complete company employees database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
+                
+                <div class="file-info">
+                    <div class="info-item">
+                        <i class="fas fa-file-code"></i>
+                        <span>File: employees_tbl.sql</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-weight-hanging"></i>
+                        <span>Size: ~2 KB</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-table"></i>
+                        <span>1 table with 10 records</span>
+                    </div>
+                </div>
+                
+                <button class="download-btn" onclick="downloadFile()">
+                    <i class="fas fa-download"></i> Download employeess_tbl.sql
+                </button>
+                
+                <div class="loading" id="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Preparing download...
+                </div>
+                
+                <div class="download-success" id="downloadSuccess">
+                    <i class="fas fa-check-circle"></i> Download started! Check your Downloads folder.
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <footer>
+            <p>© 2025 SQL Learning Platform | For educational use only</p>
+            <p>Design & Developed by: <strong>IT/CS Professor: Jester P. Rivera</strong></p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to download SQL file (WITHOUT CREATE DATABASE)
+        function downloadFile() {
+            // Show loading animation
+            document.getElementById('loading').style.display = 'block';
+            
+            // SQL content - NO CREATE DATABASE, NO USE statement!
+            const sqlContent = `-- employees_tbl.sql
+-- For Lesson 1: Basic SQL SELECT
+-- IMPORTANT: You must create 'company_db' database first!
+
+-- Create employees table
+CREATE TABLE IF NOT EXISTS employees (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    Address VARCHAR(100) NOT NULL,
+    PhoneNumber VARCHAR(15),
+    BirthDate DATE NOT NULL
+);
+
+-- Insert 10 records with intentional duplicates for teaching
+INSERT INTO employees (FirstName, LastName, Age, Address, PhoneNumber, BirthDate) VALUES
+('Jeremie', 'Valcos', 25, 'Malolos', '09171234567', '2004-05-15'),
+('Maria', 'Santos', 30, 'Tabang', '09271234568', '1993-02-20'),
+('Chris', 'Noel', 28, 'Malolos', '09371234569', '2005-06-10'),
+('Ana', 'Gonzales', 35, 'Tabang', '09471234570', '1988-03-25'),
+('Pedro', 'Cruz', 40, 'Baliuag', '09571234571', '1983-11-30'),
+('Maria', 'Lopez', 32, 'Tabang', '09671234572', '1991-07-05'),
+('Eduard', 'Square', 45, 'Malolos', '09771234573', '2003-09-12'),
+('Liza', 'Torres', 29, 'Plaridel', '09871234574', '1994-04-18'),
+('Jose', 'Mendoza', 38, 'Bustos', '09971234575', '1985-08-22'),
+('Ana', 'Fernandez', 27, 'Pulilan', '09101234576', '1996-01-07');
+
+-- End of file`;
+            
+            // Create and download the file
+            const blob = new Blob([sqlContent], { type: 'application/sql' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'employees_data.sql';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            URL.revokeObjectURL(url);
+            
+            // Hide loading and show success
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('downloadSuccess').style.display = 'block';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('downloadSuccess').style.display = 'none';
+                }, 5000);
+            }, 800);
+        }
+        
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website ready! Share this link with students.');
+        });
+    </script>
+</body>
+</html>
