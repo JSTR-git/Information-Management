@@ -159,21 +159,21 @@
         
         <!-- SINGLE LESSON SECTION -->
         <div id="lesson1">
-            <h2><i class="fas fa-database"></i> Lesson 1: Basic SQL Commands</h2>
-            <p>Learn CREATE, INSERT, SELECT statements with simple student database. Perfect for beginners!</p>
+            <h2><i class="fas fa-database"></i> Lesson 3: SQL Commands</h2>
+            <p>Learn UPDATE, SET Keyword, with simple database. Perfect for beginners!</p>
             
             <div class="file-card">
                 <div class="file-icon" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;">
                     <i class="fas fa-file-code"></i>
                 </div>
                 
-                <h3>📁 employees_tbl.sql</h3>
-                <p>Contains a complete company employees database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
+                <h3>📁 socmed_tbl.sql</h3>
+                <p>Contains a complete social media database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
                 
                 <div class="file-info">
                     <div class="info-item">
                         <i class="fas fa-file-code"></i>
-                        <span>File: employees_tbl.sql</span>
+                        <span>File: socmed_tbl.sql</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-weight-hanging"></i>
@@ -186,7 +186,7 @@
                 </div>
                 
                 <button class="download-btn" onclick="downloadFile()">
-                    <i class="fas fa-download"></i> Download employees_tbl.sql
+                    <i class="fas fa-download"></i> Download socmed_tbl.sql
                 </button>
                 
                 <div class="loading" id="loading">
@@ -202,8 +202,8 @@
         </div>
         
         <footer>
-            <p>© 2025 SQL Learning Platform | For educational use only</p>
-            <p>Design & Developed by: <strong>IT/CS Professor: Jester P. Rivera</strong></p>
+            <p>© 2026 SQL Learning Platform | For educational use only</p>
+            <p>Design & Developed by: <strong>IT/CS/CPE Instructor: Jester P. Rivera</strong></p>
         </footer>
     </div>
 
@@ -214,33 +214,32 @@
             document.getElementById('loading').style.display = 'block';
             
             // SQL content - NO CREATE DATABASE, NO USE statement!
-            const sqlContent = `-- employees_tbl.sql
--- For Lesson 1: Basic SQL SELECT
--- IMPORTANT: You must create 'company_db' database first!
+            const sqlContent = `-- socmed_tbl.sql
+-- For Lesson 3: SQL UPDATE
+-- IMPORTANT: You must create 'db_SOCMED' database first!
 
--- Create employees table
-CREATE TABLE IF NOT EXISTS employees (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(50) NOT NULL,
-    LastName VARCHAR(50) NOT NULL,
-    Age INT NOT NULL,
-    Address VARCHAR(100) NOT NULL,
-    PhoneNumber VARCHAR(15),
-    BirthDate DATE NOT NULL
+-- Create tblUsers table
+CREATE TABLE IF NOT EXISTS tblSocmed_Users (
+    UID INT PRIMARY KEY AUTO_INCREMENT,
+    EmailAddress VARCHAR(50) UNIQUE,
+    FirstName VARCHAR(16) NOT NULL,
+    LastName VARCHAR(16) NOT NULL,
+    Bio TEXT,
+    Verified BOOLEAN
 );
 
--- Insert 10 records with intentional duplicates for teaching
-INSERT INTO employees (FirstName, LastName, Age, Address, PhoneNumber, BirthDate) VALUES
-('Jeremie', 'Valdez', 25, 'Malolos', '09171234567', '2004-05-15'),
-('Maria', 'Santos', 27, 'Tabang', '09271234568', '1993-02-20'),
-('Chris', 'Valdez', 28, 'Balagtas', '09371234569', '2005-06-10'),
-('Ana', 'Garcia', 30, 'Tabang', '09471234570', '1988-03-25'),
-('Pedro', 'Cruz', 40, 'Baliuag', '09571234571', '1983-11-30'),
-('Maria', 'Lopez', 32, 'Tabang', '09671234572', '1991-07-05'),
-('Eduard', 'Square', 21, 'Malolos', '09771234573', '2003-09-12'),
-('Liza', 'Fernandez', 30, 'Plaridel', '09871234574', '1994-04-18'),
-('Jose', 'Fernandez', 35, 'Bustos', '09971234575', '1985-08-22'),
-('Ana', 'Rivera', 27, 'Pulilan', '09101234576', '1996-01-07');
+-- Insert records with empty Bio and FALSE Verified
+INSERT INTO tblUsers (EmailAddress, FirstName, LastName, Bio, Verified) VALUES
+('juan.dc@email.com', 'Juan', 'Dela Cruz', 'Hi Im Juan', FALSE),
+('maria.s@email.com', 'Maria', 'Santos', 'Relax..', FALSE),
+('jose.r@email.com', 'Jose', 'Reyes', 'Feeling Blessed', FALSE),
+('ana.g@email.com', 'Ana', 'Gonzales', 'Bruh Are You Good?', FALSE),
+('pedro.c@email.com', 'Pedro', 'Cruz', NULL, FALSE),
+('liza.t@email.com', 'Liza', 'Torres', 'Okay..', FALSE),
+('carlos.m@email.com', 'Carlos', 'Mendoza', 'Hello World', FALSE),
+('sofia.f@email.com', 'Sofia', 'Fernandez', 'Lorem Dolor', FALSE),
+('miguel.l@email.com', 'Miguel', 'Lopez', 'Hello I like You', FALSE),
+('beatriz.r@email.com', 'Beatriz', 'Ramos', NULL, FALSE);
 
 -- End of file`;
             
@@ -250,7 +249,7 @@ INSERT INTO employees (FirstName, LastName, Age, Address, PhoneNumber, BirthDate
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'employees_data.sql';
+            a.download = 'socmed_tbl.sql';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
