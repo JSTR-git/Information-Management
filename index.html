@@ -160,7 +160,7 @@
         <!-- SINGLE LESSON SECTION -->
         <div id="lesson1">
             <h2><i class="fas fa-database"></i> Lesson 3: SQL Commands</h2>
-            <p>Learn UPDATE, SET Keyword, with simple database. Perfect for beginners!</p>
+            <p>Learn Delete Truncate Drop Keyword, with DBMS!</p>
             
             <div class="file-card">
                 <div class="file-icon" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;">
@@ -168,12 +168,12 @@
                 </div>
                 
                 <h3>📁 socmed_tbl.sql</h3>
-                <p>Contains a complete social media database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
+                <p>Contains a grocery database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
                 
                 <div class="file-info">
                     <div class="info-item">
                         <i class="fas fa-file-code"></i>
-                        <span>File: socmed_tbl.sql</span>
+                        <span>File: grocery_delete.sql</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-weight-hanging"></i>
@@ -186,7 +186,7 @@
                 </div>
                 
                 <button class="download-btn" onclick="downloadFile()">
-                    <i class="fas fa-download"></i> Download socmed_tbl.sql
+                    <i class="fas fa-download"></i> Download grocery_delete.sql
                 </button>
                 
                 <div class="loading" id="loading">
@@ -214,32 +214,37 @@
             document.getElementById('loading').style.display = 'block';
             
             // SQL content - NO CREATE DATABASE, NO USE statement!
-            const sqlContent = `-- socmed_tbl.sql
--- For Lesson 3: SQL UPDATE
--- IMPORTANT: You must create 'db_SOCMED' database first!
+            const sqlContent = `-- grocery_delete.sql
+            
+-- grocery_delete.sql
+-- For teaching DELETE statements
 
--- Create tblUsers table
-CREATE TABLE IF NOT EXISTS tblSocmed_Users (
-    UID INT PRIMARY KEY AUTO_INCREMENT,
-    EmailAddress VARCHAR(50) UNIQUE,
-    FirstName VARCHAR(16) NOT NULL,
-    LastName VARCHAR(16) NOT NULL,
-    Bio TEXT,
-    Verified BOOLEAN
+-- Create database if not exists
+CREATE DATABASE IF NOT EXISTS dbGrocery;
+
+-- Use the database
+USE dbGrocery;
+
+-- Create tblProducts table
+CREATE TABLE IF NOT EXISTS tblProducts (
+    PID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductName VARCHAR(32) NOT NULL,
+    Price DOUBLE NOT NULL,
+    Quantity INT NOT NULL
 );
 
--- Insert records with empty Bio and FALSE Verified
-INSERT INTO tblSocmed_Users (EmailAddress, FirstName, LastName, Bio, Verified) VALUES
-('juan.dc@email.com', 'Juan', 'Dela Cruz', 'Hi Im Juan', FALSE),
-('maria.s@email.com', 'Maria', 'Santos', 'Relax..', FALSE),
-('jose.r@email.com', 'Jose', 'Reyes', 'Feeling Blessed', FALSE),
-('ana.g@email.com', 'Ana', 'Gonzales', 'Bruh Are You Good?', FALSE),
-('pedro.c@email.com', 'Pedro', 'Cruz', NULL, FALSE),
-('liza.t@email.com', 'Liza', 'Torres', 'Okay..', FALSE),
-('carlos.m@email.com', 'Carlos', 'Mendoza', 'Hello World', FALSE),
-('sofia.f@email.com', 'Sofia', 'Fernandez', 'Lorem Dolor', FALSE),
-('miguel.l@email.com', 'Miguel', 'Lopez', 'Hello I like You', FALSE),
-('beatriz.r@email.com', 'Beatriz', 'Ramos', NULL, FALSE);
+-- Insert 10 records with some having 0 quantity for DELETE practice
+INSERT INTO tblProducts (ProductName, Price, Quantity) VALUES
+('Rice', 55.00, 50),
+('Sugar', 60.00, 30),
+('Coffee', 120.00, 0),      -- Out of stock
+('Milk', 80.00, 25),
+('Bread', 45.00, 40),
+('Eggs', 8.00, 100),
+('Butter', 95.00, 0),       -- Out of stock
+('Cheese', 150.00, 15),
+('Pasta', 75.00, 30),
+('Cooking Oil', 110.00, 20);
 
 -- End of file`;
             
@@ -249,7 +254,7 @@ INSERT INTO tblSocmed_Users (EmailAddress, FirstName, LastName, Bio, Verified) V
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'socmed_tbl.sql';
+            a.download = 'grocery_delete.sql';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
