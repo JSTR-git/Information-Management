@@ -159,21 +159,21 @@
         
         <!-- SINGLE LESSON SECTION -->
         <div id="lesson1">
-            <h2><i class="fas fa-database"></i> Lesson 3: SQL Commands</h2>
-            <p>Learn Delete Truncate Drop Keyword, with DBMS!</p>
+            <h2><i class="fas fa-database"></i> Lesson 1: SQL Commands</h2>
+            <p>Learn CRUD operations and SQL queries with a school database.</p>
             
             <div class="file-card">
                 <div class="file-icon" style="font-size: 4rem; color: #667eea; margin-bottom: 20px;">
                     <i class="fas fa-file-code"></i>
                 </div>
                 
-                <h3>📁 socmed_tbl.sql</h3>
-                <p>Contains a grocery database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
+                <h3>📁 school_db.sql</h3>
+                <p>Contains a school database table with sample data. Perfect for learning basic CRUD operations and SQL queries.</p>
                 
                 <div class="file-info">
                     <div class="info-item">
                         <i class="fas fa-file-code"></i>
-                        <span>File: grocery_delete.sql</span>
+                        <span>File: school_db.sql</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-weight-hanging"></i>
@@ -186,7 +186,7 @@
                 </div>
                 
                 <button class="download-btn" onclick="downloadFile()">
-                    <i class="fas fa-download"></i> Download grocery_delete.sql
+                    <i class="fas fa-download"></i> Download school_db.sql
                 </button>
                 
                 <div class="loading" id="loading">
@@ -214,37 +214,36 @@
             document.getElementById('loading').style.display = 'block';
             
             // SQL content - NO CREATE DATABASE, NO USE statement!
-            const sqlContent = `-- grocery_delete.sql
+            const sqlContent = `-- school_db.sql
             
--- grocery_delete.sql
--- For teaching DELETE statements
+-- For Lesson 1: Basic SQL
+-- IMPORTANT: You must create 'school_db' database first!
 
--- Create database if not exists
-CREATE DATABASE IF NOT EXISTS dbGrocery;
-
--- Use the database
-USE dbGrocery;
-
--- Create tblProducts table
-CREATE TABLE IF NOT EXISTS tblProducts (
-    PID INT PRIMARY KEY AUTO_INCREMENT,
-    ProductName VARCHAR(32) NOT NULL,
-    Price DOUBLE NOT NULL,
-    Quantity INT NOT NULL
+-- Students table
+CREATE TABLE IF NOT EXISTS students (
+    SID INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(16) NOT NULL,
+    last_name VARCHAR(16) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    scholarship Boolean NOT NULL,
+    phonenumber VARCHAR(11),
+    email VARCHAR(50),
+    birthdate DATE NOT NULL,
+    enrollment_year INT
 );
 
--- Insert 10 records with some having 0 quantity for DELETE practice
-INSERT INTO tblProducts (ProductName, Price, Quantity) VALUES
-('Rice', 55.00, 50),
-('Sugar', 60.00, 30),
-('Coffee', 120.00, 0),      -- Out of stock
-('Milk', 80.00, 25),
-('Bread', 45.00, 40),
-('Eggs', 8.00, 100),
-('Butter', 95.00, 0),       -- Out of stock
-('Cheese', 150.00, 15),
-('Pasta', 75.00, 30),
-('Cooking Oil', 110.00, 20);
+-- Insert sample data
+INSERT INTO students (first_name, last_name, address, scholarship, phonenumber, email, birthdate, enrollment_year) VALUES
+('Maria', 'Cruz', 'Baliuag', TRUE, '09445384499', 'maria@example.com', '2002-05-15', 2023),
+('Juan', 'Dela Cruz', 'Malolos', TRUE, '09334374422', 'juan@example.com', '2003-02-20', 2023),
+('Luis', 'Manzano', 'Balagtas', TRUE, '09445384499', 'luis@example.com', '2004-06-16', 2014),
+('Sun', 'Jose', 'Baliuag', TRUE, '09665384491', 'jose@example.com', '2005-07-17', 2023),
+('Simon', 'Pedro', 'Cavite', TRUE, '09334384492', 'simon@example.com', '2006-08-18', 2016),
+('James', 'Sebedhia', 'Pulilan', TRUE, '09234324497', 'james@example.com', '2007-09-19', 2017),
+('Lilith', 'Santos', 'Plaridel', TRUE, '09782352484', 'lilith@example.com', '2008-10-20', 2018),
+('Jeremie', 'Valcos', 'Baliuag', TRUE, '09182344482', 'jeremie@example.com', '2009-11-21', 2023),
+('Chris', 'Noel', 'San Rafael', TRUE, '09562324687', 'chris@example.com', '2010-12-22', 2020),
+('Eduard', 'Square', 'Bustos', TRUE, '09578382464', 'eduard@example.com', '2011-12-23', 2021);
 
 -- End of file`;
             
@@ -254,7 +253,7 @@ INSERT INTO tblProducts (ProductName, Price, Quantity) VALUES
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'grocery_delete.sql';
+            a.download = 'school_db.sql';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
